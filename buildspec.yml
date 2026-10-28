@@ -1,6 +1,4 @@
-
 version: 0.2
-
 phases:
   install:
     runtime-versions:
@@ -8,17 +6,15 @@ phases:
     commands:
       - mkdir -p /tmp/go-cache
       - go version
-
   pre_build:
     commands:
       - export GOCACHE=/tmp/go-cache
       - go mod download
-
   build:
     commands:
       - export GOCACHE=/tmp/go-cache
+      - go test -v ./...
       - GOOS=linux GOARCH=amd64 go build -o application .
-
 artifacts:
   files:
     - application
